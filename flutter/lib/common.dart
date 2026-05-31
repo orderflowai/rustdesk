@@ -602,8 +602,13 @@ class MyTheme {
         return ThemeMode.light;
       case "dark":
         return ThemeMode.dark;
-      default:
+      case "system":
         return ThemeMode.system;
+      default:
+        // OrderFlowAi: default (unset) theme is dark to match brand (#0a0a0a)
+        // and keep the white in-app logo legible. Explicit user choices above
+        // are preserved.
+        return ThemeMode.dark;
     }
   }
 }
