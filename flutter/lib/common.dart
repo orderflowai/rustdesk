@@ -3364,7 +3364,9 @@ Widget loadPowered(BuildContext context) {
   ).marginOnly(top: 6);
 }
 
-// max 300 x 60
+// OFA: stacked OrderFlowAi logo (square ~940x788) -> render ~143x120 so the
+// white outline wordmark stays legible in the 200px left pane. Vanilla
+// RustDesk used 300x60 (wide banner) which crushed our square logo to ~72x60.
 Widget loadLogo() {
   return FutureBuilder<ByteData>(
       future: rootBundle.load('assets/logo.png'),
@@ -3378,7 +3380,7 @@ Widget loadLogo() {
             },
           );
           return Container(
-            constraints: BoxConstraints(maxWidth: 300, maxHeight: 60),
+            constraints: BoxConstraints(maxWidth: 160, maxHeight: 120),
             child: image,
           ).marginOnly(left: 12, right: 12, top: 12);
         }
