@@ -57,7 +57,11 @@ lazy_static::lazy_static! {
     static ref ONLINE: Mutex<HashMap<String, i64>> = Default::default();
     pub static ref PROD_RENDEZVOUS_SERVER: RwLock<String> = RwLock::new(match option_env!("RENDEZVOUS_SERVER") {
         Some(key) if !key.is_empty() => key,
-        _ => "",
+        // OFA: hardcode the prod rendezvous server so the ID-server field is
+        // pre-filled (and locked) even when CI does not pass the RENDEZVOUS_SERVER
+        // env. Without this only the RENDEZVOUS_SERVERS const was set, which makes
+        // connections work via fallback but leaves the Settings field empty.
+        _ => "remote.orderflowai.io",
     }.to_owned());
     pub static ref EXE_RENDEZVOUS_SERVER: RwLock<String> = Default::default();
     pub static ref APP_NAME: RwLock<String> = RwLock::new("OrderFlowAiRemote".to_owned());
