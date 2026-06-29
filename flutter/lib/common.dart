@@ -642,8 +642,12 @@ class MyTheme {
         return ThemeMode.light;
       case "dark":
         return ThemeMode.dark;
-      default:
+      case "system":
         return ThemeMode.system;
+      default:
+        // OrderFlowAi: default (unset) theme is dark to match brand (#0a0a0a)
+        // and keep the white in-app logo legible. Explicit choices preserved.
+        return ThemeMode.dark;
     }
   }
 }
@@ -3783,7 +3787,7 @@ class _LogoState extends State<_Logo> {
             },
           );
           return Container(
-            constraints: BoxConstraints(maxWidth: 300, maxHeight: 60),
+            constraints: BoxConstraints(maxWidth: 160, maxHeight: 120),
             child: image,
           ).marginOnly(left: 12, right: 12, top: 12);
         }
